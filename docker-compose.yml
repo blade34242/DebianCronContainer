@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  backup:
+    build: .
+    volumes:
+      - ./backup.sh:/usr/local/bin/backup.sh
+      - ./backups:/backups
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://graylog:1524"
+        tag: "backup-job"
+    networks:
+      - graylog_graylog
+
+networks:
+  graylog_graylog:
+    external: true
+
+
