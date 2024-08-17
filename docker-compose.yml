@@ -1,21 +1,33 @@
 version: '3.8'
 
 services:
-  backup:
+  cron-job-container:
     build: .
+    container_name: cronjob-docker
+    restart: unless-stopped
     volumes:
-      - ./backup.sh:/usr/local/bin/backup.sh
-      - ./backups:/backups
+      - ./scripts:/usr/local/scripts
+      - ./crontab:/etc/cron.d/my-cron-job
+      - /var/log/cron-job-container:/var/log
+    environment:
+      - TZ=Europe/Zurich
+    command: /usr/local/bin/start.sh
     logging:
       driver: gelf
       options:
-        gelf-address: "udp://graylog:1524"
-        tag: "backup-job"
+        gelf-address: "udp://172.21.0.88:1524"
+        tag: "cron-job"
     networks:
-      - graylog_graylog
+      graylog_graylog_network:
+      tool_network:
+        ipv4_address: 172.33.0.88
+
 
 networks:
-  graylog_graylog:
+  graylog_graylog_network:
     external: true
-
-
+  tool_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.33.0.0/24

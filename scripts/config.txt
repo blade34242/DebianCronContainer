@@ -1,0 +1,6 @@
+# config.txt
+# Format: JOB_NAME,WEBSITE_URL
+
+CRON-WPPRD,https://privSec.ch/wp-cron.php?doing_wp_cron
+CRON-WPDEV,https://privSec.ch/wordpress/wp-cron.php?doing_wp_cron
+

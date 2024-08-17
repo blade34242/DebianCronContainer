@@ -1,0 +1,2 @@
+# Run wp-cron.sh every 5 minutes
+*/5 * * * * /usr/local/scripts/wp-cron.sh >> cron-docker-refresher.log 2>&1
