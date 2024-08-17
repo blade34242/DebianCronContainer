@@ -7,7 +7,7 @@ This repository provides a setup for running cron jobs in a Docker container. Th
 
 - Docker installed on your machine
 - Docker Compose installed on your machine
-
+-
 ## Getting Started
 
 ### Build the Docker Image
